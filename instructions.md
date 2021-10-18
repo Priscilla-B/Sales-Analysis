@@ -95,3 +95,8 @@
 
 
 ***** If you have been able to follow up to this stage, you should now be fully set up to start coding !!! *****
+
+## Before you Code - Installing packages
+- make sure your venv has been activated by typing *sales-env/Scripts/activate* in your powershell terminal
+- in your terminal type *pip install pandas*. This will install both numpy and pandas which we will use for data munging and mathematical and statistical operations on data.
+- *pip install ipykernel*, which is an engine for running jupyter notebooks
