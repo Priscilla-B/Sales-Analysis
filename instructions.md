@@ -63,16 +63,35 @@
 - when you execute this command on your windows computer, you are likely to receive this error ".../activate cannot be loaded because the execution of scripts is disabled on this system". This error appears because windows has blocked unsual scripts from running on your computer to protect your computer from malware and other attacks.
 - to resolve this and enable the venv activation script to run, type *Set-ExecutionPolicy RemoteSigned -Scope CurrentUser* in your powershell terminal. ([source](https://stackoverflow.com/questions/4647429/powershell-on-windows-7-set-executionpolicy-for-regular-users))
 - now try activating the venv again by typing *sales-env/Scripts/activate* in your powershell terminal 
-- you are now set up to begin coding!!!
 
 
 ### **Setting up folder structure and project files**
 - in your bash terminal, type *mkdir data-exploration* to create a new folder called data exploration. This is the folder that will keep our data and all the files we will create to view, clean and analyze the data. You can alternatively create this folder directly on your local machine
+- type *touch data-exploration/exploration.ipynb*. This will create a new jupyter notebook in the data-exploration folder where we will write codes to view, clean and analyze the data
 - open the folder on your local machine and add the excel file that contains our raw data to this folder
-- navigate back to bash in vscode and type *cd data-exploration*. This will change your location in bash to the data-exploration directory(folder).
-- in bash, type *touch exploration.ipynb*. This will create a new jupyter notebook where we will write codes to view, clean and analyze the data
+- navigate back to bash in vscode and type *touch sales-dash-app.py*. This will create a new file named sales-dash-app.py which will contain the codes for creating the online analytics dashboard.
+- in bash type *mkdir assets*. This will create a folder called assets which will contain files such as images, css styles([what???](https://blog.devmountain.com/what-is-css-and-why-use-it/)), etc., we will be using for our project
+- create a separate folder for your images in the assets folder by typing *mkdir assets/images* in your bash terminal
+- create the file which will contain your css codes in the assets folder by typing "touch assets/styles.css" in bash 
 - under the explorer section in the left navigation in vscode, you should see your sales analysis folder. Under it, you should see these:
+    - your assets folder, which also contains your images folder and your css file
     - your data-exploration folder which contains your excel data and jupyter notebook
     - your sales-env folder which contains all files and scripts needed to manage your environment
     - your .gitignore file
     - your readme file
+    - your sales-dash-app file
+
+
+## Updating your github repository with all these changes you have made
+- in bash, type *git status*
+- git will tell you all the untracked files which need to be added and committed
+- to commit all these changes and push them to github follow these instructions:
+    - use *git add file-name* to add a file to the staging area
+    - use *git commit -m "commit message"* to commit a staged file
+    - use *git push* to push commited files from local repository to remote repository
+    - detailed explanation [here](https://www.earthdatascience.org/workshops/intro-version-control-git/basic-git-commands/)
+- type *git status* again to see if all changes have been commited and pushed
+
+
+
+***** If you have been able to follow up to this stage, you should now be fully set up to start coding !!! *****
