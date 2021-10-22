@@ -1,0 +1,86 @@
+.title{
+    text-align: center;
+    margin-bottom: 2vh;
+}
+
+.cards{
+    display: grid;
+    gap: 2vw;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.chart-title{
+    margin:2px;
+    text-align: center;
+    font-weight: 700;
+}
+hr{
+    border: none;
+    border-top: rgb(192, 192, 192) solid 1px;
+    margin-top: -5px;
+}
+.card-value{
+    box-shadow: 8px 8px 4px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1);
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    margin: 10px 5px 10px 1px;
+    padding:10px
+}
+.charts{
+    display:grid;
+    gap:2vw;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.column-one{
+    width:64vw;
+    margin-left: 2vw;
+    border: 2px solid black;
+    height: 70vh;
+}
+
+
+.column-two{
+    width: 30vw;
+    border: 2px solid black;
+    margin-right: 2vw;
+    height: 70vh;
+}
+
+.trend-matrix{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2vw;
+    width: 31vw;
+    height: 40vh
+}
+
+.trend{
+    margin: 0;
+}
+
+#trend-line{
+    height: 36vh; 
+    box-shadow: 8px 8px 4px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)
+}
+.matrix{
+    margin: 0;
+}
+#matrix-chart{
+    height: 36vh; 
+    box-shadow: 8px 8px 4px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)
+}
+
+.timeline{
+    border: 2px black solid;
+    height: 12vh;
+    margin-top: 2vh;
+}
+.slicers{
+    width:64vw;
+    border: 2px black solid;
+    height: 20vh;
+    margin-left: 2vw;
+    margin-top: 2vw;
+}
