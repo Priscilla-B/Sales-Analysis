@@ -1,3 +1,3 @@
 # Sales-Analysis
 
-[Instructions here](Instructions.md)
+[Instructions here](instructions.md)
