@@ -35,7 +35,18 @@ def region_pivot(df):
 
 def sub_category_pivot(df):
     sub_category_df = df.groupby('Sub-Category')[["Revenue", "Cost", "Profit"]].sum().sort_values(by="Revenue",ascending=False)
-    sub_category_df = sub_category_df.reset_index()
-    sub_category_df["Profit Margin"] = sub_category_df["Profit"]/sub_category_df["Revenue"]
+    sub_category_df["PM Tracker"] = sub_category_df["Profit"]/sub_category_df["Revenue"]
     sub_category_df.drop("Profit",axis=1, inplace=True)
+
+    sub_category_df.loc['Grand Total'] = sub_category_df[["Revenue", "Cost"]].sum()
+    sub_category_df["PM Tracker"].loc['Grand Total'] = sub_category_df["PM Tracker"].mean()
+    sub_category_df = sub_category_df.reset_index()
+
+    sub_category_df["Revenue"] = sub_category_df["Revenue"].apply(lambda x: "{:,.1f}k".format((x/1000)))
+    sub_category_df["Cost"] = sub_category_df["Cost"].apply(lambda x: "{:,.1f}k".format((x/1000)))
+
+    sub_category_df["PM Tracker"] = sub_category_df["PM Tracker"].apply(lambda x: '⭐' if x<0.2
+        else '⭐⭐' if x<0.25
+        else '⭐⭐⭐')
+
     return sub_category_df
