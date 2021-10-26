@@ -53,8 +53,6 @@ trend_fig.add_trace(
 )
 trend_fig.update_layout(
     autosize=True,
-    # width=580,
-    # height=250,
     margin=dict(
         l=10,
         r=50,
@@ -74,12 +72,37 @@ trend_fig.update_layout(
 
 )
 
-# matrix_fig = go.Figure(data = go.Table(
-#     header = dict(values=list(sub_category_df.columns),
-#                 fill_color="gray",
-#                 align="left"),
-#     cells = dict
-# ))
+matrix_fig = go.Figure(data = [go.Table(
+    columnwidth=[120, 60, 60, 60],
+    header = dict(values=list(sub_category_df.columns),
+                fill_color="gray",
+                line_color="gray",
+                font = dict(color="white", size=12),
+                height=25,
+                align="left"),
+    cells =  dict(values=sub_category_df.T, 
+                fill_color="white",
+                line = dict(color="gray", width=None),
+                font = dict(color="black", size=10),
+                height = 19,
+                align="left")
+)])
+
+matrix_fig.update_layout(
+    autosize=True,
+    margin=dict(
+        l=10,
+        r=50,
+        b=10,
+        t=10,
+        pad=4
+    )
+)
+
+
+
+ghana_geo = pd.read_json("data/ghana_regions.json")
+
 
 cards = html.Div(
     className="cards",
@@ -143,7 +166,12 @@ trend_matrix = html.Div(
                     children=["PRODUCT SUB-CATEGORY"]
                 ),
                 html.Hr(),
-                dcc.Graph(id="matrix-chart")
+                dcc.Graph(id="matrix-chart", figure = matrix_fig)
+                # dash_table.DataTable(
+                #     id="matrix-chart",
+                #     columns = [{"name":i, "id":i} for i in sub_category_df.columns],
+                #     data = sub_category_df.to_dict("records")
+                # )
             ]
         )
     ]
