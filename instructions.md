@@ -12,41 +12,41 @@
 
 ### **Git**
 #### What is Git?
-- 
-- 
+- [What is Git? Git explained in 2 Minutes(Mosh on YouTube)](https://www.youtube.com/watch?v=2ReR1YJrNOM)
+- [Learn Git in 15 Minutes(Colt Steele on YouTube)](https://www.youtube.com/watch?v=USjZcfj8yxE)
 
 #### How do I use Git?
 - Download git here: [git-scm](https://git-scm.com/downloads)
 - Create a github account here: [github](https://github.com/) ([which one too is that?](https://www.howtogeek.com/180167/htg-explains-what-is-github-and-what-do-geeks-use-it-for/))
 - setting up git
 
-### **Vscode**
-#### What is Vscode?
-- 
+### **VS Code**
+#### What is VS Code?
+- [What is Visual Studio Code (Educba)](https://www.educba.com/what-is-visual-studio-code/)
 
-#### How do I use Vscode?
+#### How do I use VS Code?
 - Download vscode here: [visualstudio](https://code.visualstudio.com/download)
-- 
+- [Getting Started with VS Code](https://www.youtube.com/watch?v=S320N3sxinE)
 
 ### **Jupyter Notebook**
-- what is jupyter notebook?
-- installing jupyter notebook in vscode
+- [Getting started with Jupyter Notebooks in VS Code](https://code.visualstudio.com/learn/educators/notebooks)
+- [Jupyter Notebooks in VS Code](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)
 
 ### **How do I connect all these tools?**
-- connecting github to vscode
-- connecting local git installation to github
-- using python in vscode
-- using jupyter notebook in vscode
+- [Working with GitHub in VScode](https://code.visualstudio.com/docs/editor/github)(*You can end at the getting started section*)
+- [Your first time with git and github](https://kbroman.org/github_tutorial/pages/first_time.html)
+- [Getting Started with Python in VS Code(Read)](https://code.visualstudio.com/docs/python/python-tutorial)
+- [Getting Started with Python in VS Code(Watch)](https://www.youtube.com/watch?v=E9U-EBG8jVk)
 
 
 ## **Setting up Local and Remote Repository**
 - Create a folder on your local machine to keep your project
 - Open vscode. Under the file section on the top navigation, click on open folder and navigate to where you created your folder. Click on *select folder* open to open it.
-- Open git bash in vscode ([how???](https://stackoverflow.com/questions/42606837/how-do-i-use-bash-on-windows-from-the-visual-studio-code-integrated-terminal))
+- Open git bash in VS Code ([how???](https://stackoverflow.com/questions/42606837/how-do-i-use-bash-on-windows-from-the-visual-studio-code-integrated-terminal))
 - Open your github account
 - Create a new repository here: [new](https://github.com/new) and name it
 - Maintain all default settings. Scroll down and click on *Create repository*
-- swicth back to the bash terminal in vscode
+- swicth back to the bash terminal in VS Code
 - follow the instructions in the newly created repository by copying and pasting the first set of commands one after the other after the $ sign in your bash terminal. Press enter after pasting each set of command
 - refresh your github repository after all the commands have been executed. You should see your readme file
 
