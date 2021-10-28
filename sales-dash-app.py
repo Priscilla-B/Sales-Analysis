@@ -1,4 +1,5 @@
 from calendar import month_name
+from dash.dcc import ConfirmDialogProvider
 from dash.html.Legend import Legend
 import plotly.express as px
 import plotly.graph_objects as go
@@ -7,6 +8,7 @@ from dash import Dash, html, dcc, Input, Output
 import dash_bootstrap_components as dbc
 
 import numpy as np
+from statistics import mean
 from pivot_tables import *
 
 app = Dash(__name__)
@@ -113,7 +115,7 @@ cards = html.Div(
             children=[
                 html.P("REVENUE", className="chart-title"),
                 html.Hr(),
-                html.P("{:,}".format(df['Revenue'].sum()), className="card-value", id="revenue")
+                html.P(className="card-value", id="revenue")
             ]
                     ),
         html.Div(
@@ -121,7 +123,7 @@ cards = html.Div(
             children=[
                 html.P("COST", className="chart-title"),
                 html.Hr(),
-                html.P("{:,}".format(df['Cost'].sum()), className="card-value", id="cost")
+                html.P(className="card-value", id="cost")
             ]
         ),
         html.Div(
@@ -129,7 +131,7 @@ cards = html.Div(
             children=[
                 html.P("PROFIT", className="chart-title"),
                 html.Hr(),
-                html.P("{:,}".format(df['Profit'].sum()), className="card-value", id="profit")
+                html.P(className="card-value", id="profit")
                 ]
             ),
         html.Div(
@@ -137,7 +139,7 @@ cards = html.Div(
             children=[
                 html.P("PROFIT MARGIN", className="chart-title"),
                 html.Hr(),
-                html.P("{:.2%}".format(df['Profit Margin'].mean()), className="card-value", id="p-margin")
+                html.P(className="card-value", id="p-margin")
                 ]
             )
         ]
@@ -221,6 +223,10 @@ timeline = html.Div(
     
 app.layout = html.Div(
     children=[
+        dcc.Store(
+            id="card-data",
+            storage_type="session",
+            data=None),
         html.Div(
             className="title",
             children=[
@@ -254,6 +260,24 @@ app.layout = html.Div(
 
 
 @app.callback(
+    Output(component_id="card-data", component_property="data"),
+    [Input(component_id="year-picker", component_property="value"),
+    Input(component_id="period-picker", component_property="value"),
+    Input(component_id="time-slider", component_property="value")]
+)
+
+def create_card_data(year, period, time):
+    df = create_data("data\denormalized-data.xlsx")
+    if not (year or period or time):
+        return df.to_dict("series")
+    time = [i for i in range(min(time), max(time)+1)]
+    period = "".join(period)
+    df = df[df["Years"].isin(year)]
+    df = df[df[period].isin(time)]
+    return df.to_dict("series")
+
+
+@app.callback(
     [Output(component_id="time-slider", component_property="min"),
     Output(component_id="time-slider", component_property="max"),
     Output(component_id="time-slider", component_property="marks"),
@@ -279,31 +303,28 @@ def populate_time_slider(year, period):
     return min_, max_, marks, value
 
 @app.callback(
+    [Output(component_id="revenue", component_property="children"),
+    Output(component_id="cost", component_property="children"),
     Output(component_id="profit", component_property="children"),
-    [Input(component_id="year-picker", component_property="value"),
-    Input(component_id="period-picker", component_property="value"),
-    Input(component_id="time-slider", component_property="value")]
+    Output(component_id="p-margin", component_property="children")],
+    Input(component_id="card-data", component_property="data")
     
 )
 
+def create_card_values(data):
+    df = data
 
-
-def create_profit_value(year, period, time):
-    df = create_data("data\denormalized-data.xlsx")
-    df["Years"] = df["Delivery Date"].dt.year
-    df["Months"] = df["Delivery Date"].dt.month
-    df["Quarters"] = df["Delivery Date"].dt.quarter
-    df["Days"] = df["Delivery Date"].dt.day
-
-    time = [i for i in range(min(time), max(time)+1)]
-    period = "".join(period)
-    df = df[df["Years"].isin(year)]
-    df = df[df[period].isin(time)]
-
+    revenue = df["Revenue"]
+    cost = df["Cost"]
     profit = df["Profit"]
-    profit = "{:,}".format(profit.sum())
+    p_margin = sum(profit)/sum(revenue)
+
+    revenue = "{:,}".format(sum(revenue))
+    cost = "{:,}".format(sum(cost))
+    profit = "{:,}".format(sum(profit))
+    p_margin = "{:.2%}".format(p_margin)
     
-    return profit
+    return revenue, cost, profit, p_margin
     
 
 
