@@ -10,6 +10,11 @@ def create_data(path):
     df["Profit"] = df["Revenue"] - df["Cost"]
     df["Profit Margin"] = df["Profit"]/df["Revenue"]
 
+    df["Years"] = df["Delivery Date"].dt.year
+    df["Months"] = df["Delivery Date"].dt.month
+    df["Quarters"] = df["Delivery Date"].dt.quarter
+    df["Days"] = df["Delivery Date"].dt.day
+
     return df
 
 
@@ -50,3 +55,13 @@ def sub_category_pivot(df):
         else '⭐⭐⭐')
 
     return sub_category_df
+
+
+def date_table(start='2018-01-01', end='2019-12-31'):
+    date_df = pd.DataFrame({"Date": pd.date_range(start, end)})
+    date_df["Days"] = date_df.Date.dt.day
+    date_df["Months"] = date_df.Date.dt.month
+    date_df["Quarters"] = date_df.Date.dt.quarter
+    date_df["Years"] = date_df.Date.dt.year
+    return date_df
+
