@@ -1,3 +1,4 @@
+from calendar import month_name
 from dash.html.Legend import Legend
 import plotly.express as px
 import plotly.graph_objects as go
@@ -5,7 +6,7 @@ from plotly.subplots import make_subplots
 from dash import Dash, html, dcc, Input, Output
 import dash_bootstrap_components as dbc
 
-
+import numpy as np
 from pivot_tables import *
 
 app = Dash(__name__)
@@ -16,7 +17,7 @@ df = create_data("data\denormalized-data.xlsx")
 trends_df = trend_pivot(df)
 regions_df = region_pivot(df)
 sub_category_df = sub_category_pivot(df)
-
+date_df = date_table()
 #trend_fig = px.line(trends_df, x="Order Date", y="Profit Margin")
 #trend_fig.add_bar(x=trends_df["Order Date"], y=trends_df["Revenue"])
 #trend_fig = go.Figure()
@@ -112,7 +113,7 @@ cards = html.Div(
             children=[
                 html.P("REVENUE", className="chart-title"),
                 html.Hr(),
-                html.P("{:,}".format(df['Revenue'].sum()), className="card-value")
+                html.P("{:,}".format(df['Revenue'].sum()), className="card-value", id="revenue")
             ]
                     ),
         html.Div(
@@ -120,7 +121,7 @@ cards = html.Div(
             children=[
                 html.P("COST", className="chart-title"),
                 html.Hr(),
-                html.P("{:,}".format(df['Cost'].sum()), className="card-value")
+                html.P("{:,}".format(df['Cost'].sum()), className="card-value", id="cost")
             ]
         ),
         html.Div(
@@ -128,7 +129,7 @@ cards = html.Div(
             children=[
                 html.P("PROFIT", className="chart-title"),
                 html.Hr(),
-                html.P("{:,}".format(df['Profit'].sum()), className="card-value")
+                html.P("{:,}".format(df['Profit'].sum()), className="card-value", id="profit")
                 ]
             ),
         html.Div(
@@ -136,7 +137,7 @@ cards = html.Div(
             children=[
                 html.P("PROFIT MARGIN", className="chart-title"),
                 html.Hr(),
-                html.P("{:.2%}".format(df['Profit Margin'].mean()), className="card-value")
+                html.P("{:.2%}".format(df['Profit Margin'].mean()), className="card-value", id="p-margin")
                 ]
             )
         ]
@@ -181,9 +182,43 @@ trend_matrix = html.Div(
 slicers = html.Div(
     className="slicers",
     children=[
-
+        
     ]
 )
+
+timeline = html.Div(
+    id="timeline",
+    children=[
+        html.Div(
+            className="time-selectors",
+            children=[
+            dcc.Dropdown(
+                id="year-picker",
+                options=[
+                    {"label":2018, "value":2018},
+                    {"label":2019, "value":2019}
+                ],
+                value=[2018,2019],
+                multi=True
+            ),
+            dcc.Dropdown(
+                id="period-picker",
+                options=[
+                    {"label":"Days", "value":"Days"},
+                    {"label":"Months", "value":"Months"},
+                    {"label":"Quarters", "value":"Quarters"}
+                ],
+                value="Months"
+            )
+            ]),
+        html.Div(
+            id="time-slider-container",
+            children=[
+                dcc.RangeSlider(id="time-slider")
+            ]
+        )
+    ])
+    
 app.layout = html.Div(
     children=[
         html.Div(
@@ -200,10 +235,7 @@ app.layout = html.Div(
                     children=[
                         cards,
                         trend_matrix,
-                        html.Div(
-                            className="timeline",
-                            children=[]
-                        )
+                        timeline  
                 ]
             ),
                 html.Div(
@@ -221,9 +253,58 @@ app.layout = html.Div(
 )
 
 
+@app.callback(
+    [Output(component_id="time-slider", component_property="min"),
+    Output(component_id="time-slider", component_property="max"),
+    Output(component_id="time-slider", component_property="marks"),
+    Output(component_id="time-slider", component_property="value")],
+    [Input(component_id="year-picker", component_property="value"),
+    Input(component_id="period-picker", component_property="value")]
+)
+
+def populate_time_slider(year, period):
+    date_df_f = date_df.copy()
+    date_df_f = date_df_f[date_df_f["Years"].isin(year)]
+
+    period = "".join(period)
+    date_df_f = date_df_f[period]
+
+    # if period == ["Months"]:
+    #     date_df_f = date_df_f.apply(lambda x: calendar.month_abbr[x])
+    
+    min_ = int(np.asarray(date_df_f.min()))
+    max_ = int(np.asarray(date_df_f.max()))
+    marks = {period:str(period) for period in date_df_f}
+    value = [min_, max_]
+    return min_, max_, marks, value
+
+@app.callback(
+    Output(component_id="profit", component_property="children"),
+    [Input(component_id="year-picker", component_property="value"),
+    Input(component_id="period-picker", component_property="value"),
+    Input(component_id="time-slider", component_property="value")]
+    
+)
 
 
 
+def create_profit_value(year, period, time):
+    df = create_data("data\denormalized-data.xlsx")
+    df["Years"] = df["Delivery Date"].dt.year
+    df["Months"] = df["Delivery Date"].dt.month
+    df["Quarters"] = df["Delivery Date"].dt.quarter
+    df["Days"] = df["Delivery Date"].dt.day
+
+    time = [i for i in range(min(time), max(time)+1)]
+    period = "".join(period)
+    df = df[df["Years"].isin(year)]
+    df = df[df[period].isin(time)]
+
+    profit = df["Profit"]
+    profit = "{:,}".format(profit.sum())
+    
+    return profit
+    
 
 
 
