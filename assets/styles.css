@@ -79,6 +79,13 @@ hr{
     height: 12vh;
     margin-top: 2vh;
 }
+
+.time-selectors{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    width:30vw;
+
+}
 .slicers{
     width:64vw;
     border: 2px black solid;
