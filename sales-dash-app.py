@@ -20,91 +20,6 @@ trends_df = trend_pivot(df)
 regions_df = region_pivot(df)
 sub_category_df = sub_category_pivot(df)
 date_df = date_table()
-#trend_fig = px.line(trends_df, x="Order Date", y="Profit Margin")
-#trend_fig.add_bar(x=trends_df["Order Date"], y=trends_df["Revenue"])
-#trend_fig = go.Figure()
-trend_fig = make_subplots(specs=[[{"secondary_y": True}]])
-trend_fig.add_trace(
-    go.Bar(
-        x=trends_df["Order Date"], y=trends_df["Revenue"],
-        name = "Revenue"
-    ),
-    secondary_y = False
-)
-
-trend_fig.add_trace(
-    go.Bar(
-        x=trends_df["Order Date"], y=trends_df["Cost"],
-        name = "Cost"
-    ),
-    secondary_y = False
-)
-trend_fig.add_trace(
-    go.Bar(
-        x=trends_df["Order Date"], y=trends_df["Profit"],
-        name = "Profit"
-    ),
-    secondary_y = False
-)
-
-trend_fig.add_trace(
-    go.Scatter(
-        x=trends_df["Order Date"], y=trends_df["Profit Margin"],
-        name = "Profit Margin",
-    ),
-    secondary_y = True
-)
-trend_fig.update_layout(
-    autosize=True,
-    margin=dict(
-        l=10,
-        r=50,
-        b=10,
-        t=10,
-        pad=4
-    ),
-    legend=dict(
-        yanchor="bottom",
-        xanchor="left",
-        orientation='h',
-        y=1.02,
-        x=0.1
-    ),
-    paper_bgcolor="rgba(0,0,0,0)",
-    plot_bgcolor="rgba(0,0,0,0)"
-
-)
-
-matrix_fig = go.Figure(data = [go.Table(
-    columnwidth=[120, 60, 60, 60],
-    header = dict(values=list(sub_category_df.columns),
-                fill_color="gray",
-                line_color="gray",
-                font = dict(color="white", size=12),
-                height=25,
-                align="left"),
-    cells =  dict(values=sub_category_df.T, 
-                fill_color="white",
-                line = dict(color="gray", width=None),
-                font = dict(color="black", size=10),
-                height = 19,
-                align="left")
-)])
-
-matrix_fig.update_layout(
-    autosize=True,
-    margin=dict(
-        l=10,
-        r=50,
-        b=10,
-        t=10,
-        pad=4
-    )
-)
-
-
-
-ghana_geo = pd.read_json("data/ghana_regions.json")
 
 
 cards = html.Div(
@@ -157,8 +72,7 @@ trend_matrix = html.Div(
                 ),
                 html.Hr(),
                 dcc.Graph(
-                    id="trend-line",
-                    figure=trend_fig)
+                    id="trend-line")
             ]
         ),
         html.Div(
@@ -169,7 +83,7 @@ trend_matrix = html.Div(
                     children=["PRODUCT SUB-CATEGORY"]
                 ),
                 html.Hr(),
-                dcc.Graph(id="matrix-chart", figure = matrix_fig)
+                dcc.Graph(id="matrix-chart")
                 # dash_table.DataTable(
                 #     id="matrix-chart",
                 #     columns = [{"name":i, "id":i} for i in sub_category_df.columns],
