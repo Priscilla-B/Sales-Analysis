@@ -19,7 +19,8 @@ def create_data(path):
 
 
 def trend_pivot(df):
-    months = df["Order Date"].dt.month
+    df = pd.DataFrame(df)
+    months = pd.to_datetime(df["Order Date"]).dt.month
     try:
         months = months.apply(lambda x: calendar.month_abbr[x])
     except(TypeError):
@@ -34,11 +35,13 @@ def trend_pivot(df):
     return trend_df
 
 def region_pivot(df):
+    df = pd.DataFrame(df)
     regions_df = df.groupby('Region')["Profit"].sum().sort_values(ascending=False)
     regions_df = regions_df.reset_index()
     return regions_df
 
 def sub_category_pivot(df):
+    df = pd.DataFrame(df)
     sub_category_df = df.groupby('Sub-Category')[["Revenue", "Cost", "Profit"]].sum().sort_values(by="Revenue",ascending=False)
     sub_category_df["PM Tracker"] = sub_category_df["Profit"]/sub_category_df["Revenue"]
     sub_category_df.drop("Profit",axis=1, inplace=True)
