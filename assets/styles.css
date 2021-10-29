@@ -83,7 +83,9 @@ hr{
 .time-selectors{
     display:grid;
     grid-template-columns: repeat(2, 1fr);
-    width:30vw;
+    width:22vw;
+    margin-top: 3vh;
+    margin-left: 1vw;
 
 }
 .slicers{
