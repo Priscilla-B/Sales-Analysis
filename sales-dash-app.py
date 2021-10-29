@@ -1,24 +1,17 @@
 from calendar import month_name
 from dash.dcc import ConfirmDialogProvider
 from dash.html.Legend import Legend
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 from dash import Dash, html, dcc, Input, Output
 import dash_bootstrap_components as dbc
 
 import numpy as np
-from statistics import mean
 from pivot_tables import *
+from plots import *
 
 app = Dash(__name__)
 #themes: CYBORG, SLATE, SOLAR, SUPERHERO, FLATLY
 server = app.server
 
-df = create_data("data\denormalized-data.xlsx")
-trends_df = trend_pivot(df)
-regions_df = region_pivot(df)
-sub_category_df = sub_category_pivot(df)
 date_df = date_table()
 
 
@@ -105,6 +98,7 @@ slicers = html.Div(
 timeline = html.Div(
     id="timeline",
     children=[
+        html.P("Select Date"),
         html.Div(
             className="time-selectors",
             children=[
@@ -220,7 +214,9 @@ def populate_time_slider(year, period):
     [Output(component_id="revenue", component_property="children"),
     Output(component_id="cost", component_property="children"),
     Output(component_id="profit", component_property="children"),
-    Output(component_id="p-margin", component_property="children")],
+    Output(component_id="p-margin", component_property="children"),
+    Output(component_id="trend-line", component_property="figure"),
+    Output(component_id="matrix-chart", component_property="figure")],
     Input(component_id="card-data", component_property="data")
     
 )
@@ -237,8 +233,16 @@ def create_card_values(data):
     cost = "{:,}".format(sum(cost))
     profit = "{:,}".format(sum(profit))
     p_margin = "{:.2%}".format(p_margin)
+
+    trends_df = trend_pivot(df)
+    trend_fig = trend(trends_df)
+
+    sub_category_df = sub_category_pivot(df)
+    matrix_chart = matrix(sub_category_df)
+
+    #regions_df = region_pivot(df)
     
-    return revenue, cost, profit, p_margin
+    return revenue, cost, profit, p_margin, trend_fig, matrix_chart
     
 
 
