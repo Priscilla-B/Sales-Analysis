@@ -13,7 +13,7 @@ app = Dash(__name__)
 server = app.server
 
 date_df = date_table()
-
+df = create_data("data\denormalized-data.xlsx")
 
 cards = html.Div(
     className="cards",
@@ -91,7 +91,72 @@ trend_matrix = html.Div(
 slicers = html.Div(
     className="slicers",
     children=[
-        
+        html.Div(
+            className = "checklist",
+            children=[
+                html.P("Delivery Mode"),
+                dcc.Checklist(
+                    id="delivery-mode",
+                    options=[{"label":mode, "value":mode} for mode in df["Delivery Mode"].unique()],
+                    labelStyle={"display":"block"}
+                )
+            ]
+        ),
+        html.Div(
+            className = "checklist",
+            children=[
+                html.P("Segment"),
+                dcc.Checklist(
+                    id="cust-segment",
+                    options=[{"label":segment, "value":segment} for segment in df["Customer Segment"].unique()],
+                    labelStyle={"display":"block"}
+                )
+            ] 
+        ),
+        html.Div(
+            className = "checklist",
+            children=[
+                html.P("Region"),
+                dcc.Checklist(
+                    id="region",
+                    options=[{"label":region, "value":region} for region in df["Region"].unique()],
+                    labelStyle={"display":"block"}
+                )
+            ] 
+        ),
+        html.Div(
+            className = "checklist",
+            children=[
+                html.P("Category"),
+                dcc.Checklist(
+                    id="prod-category",
+                    options=[{"label":category, "value":category} for category in df["Product Category"].unique()],
+                    labelStyle={"display":"block"}
+                )
+            ] 
+        ),
+        html.Div(
+            className = "checklist",
+            children=[
+                html.P("Sub-Category"),
+                dcc.Checklist(
+                    id="sub-category",
+                    options=[{"label":sub, "value":sub} for sub in df["Sub-Category"].unique()],
+                    labelStyle={"display":"block"}
+                )
+            ] 
+        ),
+        html.Div(
+            className = "checklist",
+            children=[
+                html.P("Selector"),
+                dcc.Checklist(
+                    id="selector",
+                    options=[{"label":option, "value":option} for option in df["Selector"].unique()],
+                    labelStyle={"display":"block"}
+                )
+            ] 
+        )
     ]
 )
 
@@ -132,7 +197,7 @@ timeline = html.Div(
 app.layout = html.Div(
     children=[
         dcc.Store(
-            id="card-data",
+            id="data-store",
             storage_type="session",
             data=None),
         html.Div(
@@ -168,20 +233,40 @@ app.layout = html.Div(
 
 
 @app.callback(
-    Output(component_id="card-data", component_property="data"),
+    Output(component_id="data-store", component_property="data"),
     [Input(component_id="year-picker", component_property="value"),
     Input(component_id="period-picker", component_property="value"),
-    Input(component_id="time-slider", component_property="value")]
+    Input(component_id="time-slider", component_property="value"),
+    Input(component_id="delivery-mode", component_property="value"),
+    Input(component_id="cust-segment", component_property="value"),
+    Input(component_id="region", component_property="value"),
+    Input(component_id="prod-category", component_property="value"),
+    Input(component_id="sub-category", component_property="value"),
+    Input(component_id="selector", component_property="value")
+    ]
 )
 
-def create_card_data(year, period, time):
+def create_filtered_data(year, period, time, delivery, segment, region, category, subcategory, selector):
     df = create_data("data\denormalized-data.xlsx")
-    if not (year or period or time):
-        return df.to_dict("series")
+    
     time = [i for i in range(min(time), max(time)+1)]
     period = "".join(period)
     df = df[df["Years"].isin(year)]
     df = df[df[period].isin(time)]
+
+    if delivery:
+        df = df[df["Delivery Mode"].isin(delivery)]
+    elif segment:
+        df = df[df["Customer Segment"].isin(segment)]
+    elif region:
+        df = df[df["Region"].isin(region)]
+    elif category:
+        df = df[df["Product Category"].isin(category)]
+    elif subcategory:
+        df = df[df["Sub-Category"].isin(subcategory)]
+    elif selector:
+        df = df[df["Selector"].isin(selector)]
+    
     return df.to_dict("series")
 
 
@@ -217,11 +302,11 @@ def populate_time_slider(year, period):
     Output(component_id="p-margin", component_property="children"),
     Output(component_id="trend-line", component_property="figure"),
     Output(component_id="matrix-chart", component_property="figure")],
-    Input(component_id="card-data", component_property="data")
+    Input(component_id="data-store", component_property="data")
     
 )
 
-def create_card_values(data):
+def create_charts(data):
     df = data
 
     revenue = df["Revenue"]
