@@ -89,9 +89,11 @@ hr{
 
 }
 .slicers{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
     width:64vw;
     border: 2px black solid;
     height: 20vh;
     margin-left: 2vw;
-    margin-top: 2vw;
+    margin-top: 1vw;
 }
