@@ -84,6 +84,7 @@ def matrix(df):
             pad=4
         )
     )
+    return matrix_fig
 
 def create_map():
     ghana_geo = pd.read_json("data/ghana_regions.json")
