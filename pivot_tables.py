@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import openpyxl
 import calendar
@@ -14,6 +15,7 @@ def create_data(path):
     df["Months"] = df["Delivery Date"].dt.month
     df["Quarters"] = df["Delivery Date"].dt.quarter
     df["Days"] = df["Delivery Date"].dt.day
+    df["Selector"] = np.where(df["Discount"]>0, "Discount", "No Discount")
 
     return df
 
