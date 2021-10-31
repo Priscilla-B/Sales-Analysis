@@ -87,6 +87,40 @@ trend_matrix = html.Div(
     ]
 )
 
+timeline = html.Div(
+    id="timeline",
+    children=[
+        html.P("Select Date"),
+        html.Div(
+            className="time-selectors",
+            children=[
+            dcc.Dropdown(
+                id="year-picker",
+                options=[
+                    {"label":2018, "value":2018},
+                    {"label":2019, "value":2019}
+                ],
+                value=[2018,2019],
+                multi=True
+            ),
+            dcc.Dropdown(
+                id="period-picker",
+                options=[
+                    {"label":"Days", "value":"Days"},
+                    {"label":"Months", "value":"Months"},
+                    {"label":"Quarters", "value":"Quarters"}
+                ],
+                value="Months"
+            )
+            ]),
+        html.Div(
+            id="time-slider-container",
+            children=[
+                dcc.RangeSlider(id="time-slider")
+            ]
+        )
+    ])
+    
 
 slicers = html.Div(
     className="slicers",
@@ -160,40 +194,7 @@ slicers = html.Div(
     ]
 )
 
-timeline = html.Div(
-    id="timeline",
-    children=[
-        html.P("Select Date"),
-        html.Div(
-            className="time-selectors",
-            children=[
-            dcc.Dropdown(
-                id="year-picker",
-                options=[
-                    {"label":2018, "value":2018},
-                    {"label":2019, "value":2019}
-                ],
-                value=[2018,2019],
-                multi=True
-            ),
-            dcc.Dropdown(
-                id="period-picker",
-                options=[
-                    {"label":"Days", "value":"Days"},
-                    {"label":"Months", "value":"Months"},
-                    {"label":"Quarters", "value":"Quarters"}
-                ],
-                value="Months"
-            )
-            ]),
-        html.Div(
-            id="time-slider-container",
-            children=[
-                dcc.RangeSlider(id="time-slider")
-            ]
-        )
-    ])
-    
+
 app.layout = html.Div(
     children=[
         dcc.Store(
@@ -230,6 +231,33 @@ app.layout = html.Div(
         
     ]
 )
+
+
+
+@app.callback(
+    [Output(component_id="time-slider", component_property="min"),
+    Output(component_id="time-slider", component_property="max"),
+    Output(component_id="time-slider", component_property="marks"),
+    Output(component_id="time-slider", component_property="value")],
+    [Input(component_id="year-picker", component_property="value"),
+    Input(component_id="period-picker", component_property="value")]
+)
+
+def populate_time_slider(year, period):
+    date_df_f = date_df.copy()
+    date_df_f = date_df_f[date_df_f["Years"].isin(year)]
+
+    period = "".join(period)
+    date_df_f = date_df_f[period]
+
+    # if period == ["Months"]:
+    #     date_df_f = date_df_f.apply(lambda x: calendar.month_abbr[x])
+    
+    min_ = int(np.asarray(date_df_f.min()))
+    max_ = int(np.asarray(date_df_f.max()))
+    marks = {period:str(period) for period in date_df_f}
+    value = [min_, max_]
+    return min_, max_, marks, value
 
 
 @app.callback(
@@ -270,30 +298,6 @@ def create_filtered_data(year, period, time, delivery, segment, region, category
     return df.to_dict("series")
 
 
-@app.callback(
-    [Output(component_id="time-slider", component_property="min"),
-    Output(component_id="time-slider", component_property="max"),
-    Output(component_id="time-slider", component_property="marks"),
-    Output(component_id="time-slider", component_property="value")],
-    [Input(component_id="year-picker", component_property="value"),
-    Input(component_id="period-picker", component_property="value")]
-)
-
-def populate_time_slider(year, period):
-    date_df_f = date_df.copy()
-    date_df_f = date_df_f[date_df_f["Years"].isin(year)]
-
-    period = "".join(period)
-    date_df_f = date_df_f[period]
-
-    # if period == ["Months"]:
-    #     date_df_f = date_df_f.apply(lambda x: calendar.month_abbr[x])
-    
-    min_ = int(np.asarray(date_df_f.min()))
-    max_ = int(np.asarray(date_df_f.max()))
-    marks = {period:str(period) for period in date_df_f}
-    value = [min_, max_]
-    return min_, max_, marks, value
 
 @app.callback(
     [Output(component_id="revenue", component_property="children"),
