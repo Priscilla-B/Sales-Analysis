@@ -36,7 +36,6 @@ hr{
 .column-one{
     width:64vw;
     margin-left: 2vw;
-    border: 2px solid black;
     height: 70vh;
 }
 
@@ -83,8 +82,8 @@ hr{
 .time-selectors{
     display:grid;
     grid-template-columns: repeat(2, 1fr);
-    width:22vw;
-    margin-top: 3vh;
+    width:400px;
+    margin-top: 20px;
     margin-left: 1vw;
 
 }
@@ -92,8 +91,12 @@ hr{
     display:grid;
     grid-template-columns: repeat(6, 1fr);
     width:64vw;
-    border: 2px black solid;
     height: 20vh;
     margin-left: 2vw;
     margin-top: 1vw;
+}
+
+.slicer-title{
+    margin:2px;
+    font-weight: 700;
 }
