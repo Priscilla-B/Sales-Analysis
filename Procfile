@@ -1,0 +1,1 @@
+web: gunicorn sales-dash-app:server
