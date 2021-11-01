@@ -48,7 +48,8 @@ def trend(df):
             xanchor="left",
             orientation='h',
             y=1.02,
-            x=0.1
+            x=0.1,
+            font= dict(size = 9)
         ),
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)"
@@ -59,18 +60,18 @@ def trend(df):
 def matrix(df):
 
     matrix_fig = go.Figure(data = [go.Table(
-        columnwidth=[120, 60, 60, 60],
+        columnwidth=[120, 60, 60, 80],
         header = dict(values=list(df.columns),
                     fill_color="gray",
                     line_color="gray",
-                    font = dict(color="white", size=12),
-                    height=25,
+                    font = dict(color="white", size=10),
+                    height=22,
                     align="left"),
         cells =  dict(values=df.T, 
                     fill_color="white",
                     line = dict(color="gray", width=None),
-                    font = dict(color="black", size=10),
-                    height = 19,
+                    font = dict(color="black", size=8),
+                    height = 16,
                     align="left")
     )])
 
