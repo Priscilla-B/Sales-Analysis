@@ -10,6 +10,7 @@ from plots import *
 
 app = Dash(__name__)
 #themes: CYBORG, SLATE, SOLAR, SUPERHERO, FLATLY
+#
 server = app.server
 
 date_df = date_table()
