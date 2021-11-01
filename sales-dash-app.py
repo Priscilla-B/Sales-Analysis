@@ -91,7 +91,7 @@ trend_matrix = html.Div(
 timeline = html.Div(
     id="timeline",
     children=[
-        html.P("Select Date"),
+        #html.P("Select Date"),
         html.Div(
             className="time-selectors",
             children=[
@@ -129,7 +129,7 @@ slicers = html.Div(
         html.Div(
             className = "checklist",
             children=[
-                html.P("Delivery Mode"),
+                html.P("Delivery Mode", className="slicer-title"),
                 dcc.Checklist(
                     id="delivery-mode",
                     options=[{"label":mode, "value":mode} for mode in df["Delivery Mode"].unique()],
@@ -140,7 +140,7 @@ slicers = html.Div(
         html.Div(
             className = "checklist",
             children=[
-                html.P("Segment"),
+                html.P("Segment", className="slicer-title"),
                 dcc.Checklist(
                     id="cust-segment",
                     options=[{"label":segment, "value":segment} for segment in df["Customer Segment"].unique()],
@@ -151,7 +151,7 @@ slicers = html.Div(
         html.Div(
             className = "checklist",
             children=[
-                html.P("Region"),
+                html.P("Region", className="slicer-title"),
                 dcc.Checklist(
                     id="region",
                     options=[{"label":region, "value":region} for region in df["Region"].unique()],
@@ -162,7 +162,7 @@ slicers = html.Div(
         html.Div(
             className = "checklist",
             children=[
-                html.P("Category"),
+                html.P("Category", className="slicer-title"),
                 dcc.Checklist(
                     id="prod-category",
                     options=[{"label":category, "value":category} for category in df["Product Category"].unique()],
@@ -173,7 +173,7 @@ slicers = html.Div(
         html.Div(
             className = "checklist",
             children=[
-                html.P("Sub-Category"),
+                html.P("Sub-Category", className="slicer-title"),
                 dcc.Checklist(
                     id="sub-category",
                     options=[{"label":sub, "value":sub} for sub in df["Sub-Category"].unique()],
@@ -184,7 +184,7 @@ slicers = html.Div(
         html.Div(
             className = "checklist",
             children=[
-                html.P("Selector"),
+                html.P("Selector", className="slicer-title"),
                 dcc.Checklist(
                     id="selector",
                     options=[{"label":option, "value":option} for option in df["Selector"].unique()],
