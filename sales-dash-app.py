@@ -14,7 +14,7 @@ app = Dash(__name__)
 server = app.server
 
 date_df = date_table()
-df = create_data("data\denormalized-data.xlsx")
+df = create_data("denormalized-data.xlsx")
 
 cards = html.Div(
     className="cards",
@@ -276,7 +276,7 @@ def populate_time_slider(year, period):
 )
 
 def create_filtered_data(year, period, time, delivery, segment, region, category, subcategory, selector):
-    df = create_data("data\denormalized-data.xlsx")
+    df = create_data("denormalized-data.xlsx")
     
     time = [i for i in range(min(time), max(time)+1)]
     period = "".join(period)
