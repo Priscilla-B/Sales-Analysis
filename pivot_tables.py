@@ -40,6 +40,7 @@ def region_pivot(df):
     df = pd.DataFrame(df)
     regions_df = df.groupby('Region')["Profit"].sum().sort_values(ascending=False)
     regions_df = regions_df.reset_index()
+    regions_df["Region"] = regions_df["Region"].str.replace("Brong-Ahafo", "Brong Ahafo")
     return regions_df
 
 def sub_category_pivot(df):
@@ -52,8 +53,8 @@ def sub_category_pivot(df):
     sub_category_df["PM Tracker"].loc['Grand Total'] = sub_category_df["PM Tracker"].mean()
     sub_category_df = sub_category_df.reset_index()
 
-    sub_category_df["Revenue"] = sub_category_df["Revenue"].apply(lambda x: "{:,.1f}k".format((x/1000)))
-    sub_category_df["Cost"] = sub_category_df["Cost"].apply(lambda x: "{:,.1f}k".format((x/1000)))
+    # sub_category_df["Revenue"] = sub_category_df["Revenue"].apply(lambda x: "{:,.1f}k".format((x/1000)))
+    # sub_category_df["Cost"] = sub_category_df["Cost"].apply(lambda x: "{:,.1f}k".format((x/1000)))
 
     sub_category_df["PM Tracker"] = sub_category_df["PM Tracker"].apply(lambda x: '⭐' if x<0.2
         else '⭐⭐' if x<0.25
