@@ -41,9 +41,8 @@ hr{
 
 
 .column-two{
-    width: 30vw;
-    border: 2px solid black;
-    margin-right: 2vw;
+    width: 29.5vw;
+    box-shadow: 8px 8px 4px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1);
     height: 70vh;
 }
 
@@ -73,6 +72,19 @@ hr{
     box-shadow: 8px 8px 4px rgba(0,0,0,0.2), 0 0 3px rgba(0,0,0,0.1)
 }
 
+/* reduce row height */
+.dash-table-container .dash-spreadsheet-container .dash-spreadsheet-inner tr{
+    min-height: 4px;
+    height: 4px;
+    max-height:4px;
+    padding:0;
+}
+/* reduce header height */
+.dash-table-container .dash-spreadsheet-container .dash-spreadsheet-inner tr:first-of-type{
+    min-height: 15px;
+    height: 15px;
+}
+
 .timeline{
     border: 2px black solid;
     height: 12vh;
@@ -100,3 +112,18 @@ hr{
     margin:2px;
     font-weight: 700;
 }
+
+/* .geolayer{
+    width: 380;
+    height: 580;
+}
+
+.choroplethlayer{
+    width: 380;
+    height: 580;
+}
+
+.scatterlayer{
+    width: 380;
+    height: 580;
+} */
