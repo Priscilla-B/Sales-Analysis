@@ -6,15 +6,18 @@ Python is a general purpose programming language for solving a variety of proble
 
 ## What are some uses of python?
 - Data Analysis
-- Machine Learning
+- Machine Learning and Artificial Intelligence
 - Web Development
-- 
+- Game Development
+- Mobile and Desktop Applications
+- Task Automation
 
 ## Companies using Python
 - Google uses python in its web search system
-- Intel, Cisco, HP, Seagate, Qualcomm, and IBM use python for hardware testing
 - ESRI uses python as an end-user customization tool for its popular GIS mapping products
-- Youtube is largely written in python
+- Youtube is largely written in python. Same with Reddit, Pinterest and Instagram
+- Companies like Uber, Goldman Sachs, Paypal, Netflix and Google require developers and data specialists to work with python.
+- Intel, Cisco, HP, Seagate, Qualcomm, and IBM use python for hardware testing
 
 ## Algorithm vs Program
 - An algorithm is an idea or a way to solve a problem
