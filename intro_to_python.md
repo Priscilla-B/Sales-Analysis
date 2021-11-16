@@ -60,14 +60,24 @@ A python variable can be reassigned or swapped. Different variables can store th
     - colon
     - indented body lines
 
-The simplest and most common boolean tests use `==` to compare two values and it's `True` if both values are the same.
+The simplest and most common boolean tests use `==` to compare two values and results in `True` if both values are the same, otherwise, it's `False`. Other operators like `>`, `<`, `>=`, `<=` can also be used.
+
+The values `True` and `False` are known as Boolean values and have the data type "bool", short term for "boolean". They are usually used to control if and while loops.   The operators used in boolean tests can also be combined with the keywords `and`, `or` and `not`.These are known as logical operators. They help test for multiple conditions at the same time, or invert a boolean test(in the case of `not`).
+These logical operators follow this precedence: `not` is the highest order, followed by `and` and finally `or`, similar to the precedence for the mathematical operators `-`, `*`, `+`.
+Try these in your terminal: `9 < 6 and  3 < 6 or 2 < 6`,  `9 < 6 and  (3 < 6 or 2 < 6)`
 
 ![](assets/images/if1.png)
 
-- There's an optional `else:`part of an if statement that enables you to add code to run if the boolean test is `False`.
+- There's an optional `else:` part of an if statement that enables you to add code to run if the boolean test is `False`.
 
 ![](assets/images/if2.png)
+
+- We also use `elif` (else if) blocks in if statements when we need to evaluate more than two conditions and take various actions based on the boolean tests for each of those conditions. Think of them like nested if statements in excel.
+
+![](assets/images/elif.png)
+
 ### While and For Loops
+
 ### Functions
 ### Data Structures
 - Lists
