@@ -80,8 +80,15 @@ Try these in your terminal: `9 < 6 and  3 < 6 or 2 < 6`,  `9 < 6 and  (3 < 6 or 
     ```
 
 - We also use `elif` (else if) blocks in if statements when we need to evaluate more than two conditions and take various actions based on the boolean tests for each of those conditions. Think of them like nested if statements in excel.
-
-![](assets/images/elif.png)
+    ```py
+    s = e
+    if s == 'a':
+        print("letter a")
+    elif s == 'b':
+        print("letter b")
+    else:
+        print("another letter")
+    ```
 
 ### While and For Loops
 A loop takes a few lines of code and runs them over and over again.
