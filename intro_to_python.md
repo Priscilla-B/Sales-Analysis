@@ -25,7 +25,8 @@ Python is a general purpose programming language for solving a variety of proble
 
 
 ## Python Syntax
-### Variables in Python
+
+### **Variables in Python**
 A python variable stores a value in memory as a program runs. A variable is created by an equal to assignment.
 e.g. x = 4, creates a variable called x which stores a value called 4.
 
@@ -35,7 +36,7 @@ A python variable can be reassigned or swapped. Different variables can store th
 
 ![](assets/images/py-var2.png)
 
-### Math and expressions
+### **Math and expressions**
 - **Numbers**:There are two different types of numbers for arithmetic operations in python. These are "int" (e.g., 3, -4) for whole integer numbers and "float" (e.g. 2.45, -5.67) for decimal numbers.
 - **Precedence**: Arithmetic operations in python follows the same precendence rules as in mathematics. Remember *BODMAS*!
 - **Expressions**:
@@ -45,7 +46,9 @@ A python variable can be reassigned or swapped. Different variables can store th
     - The "modulo" or "mod" operator is the remainder after division
 
 ![](assets/images/math1.png)     ![](assets/images/math2.png)
-### Print and Input
+
+
+### **Print and Input**
 - The python print function `print()` takes in python data such as ints and strings and shows them in the terminal on one line of text. The items are converted to text form, separated by spaces.
 
 ![](assets/images/print1.png)
@@ -53,7 +56,9 @@ A python variable can be reassigned or swapped. Different variables can store th
 - The input function `input()` allows us to take information from a particular user. That user information can further used in a program, or printed back to the user.
 
 ![](assets/images/input1.png)
-### If and Comparison
+
+
+### **If and Comparison**
 The `if` statement controls if some lines run or not. The if statement syntax has four parts:
 - `if`
 - boolean test
@@ -95,9 +100,11 @@ Try these in your terminal: `9 < 6 and  3 < 6 or 2 < 6`,  `9 < 6 and  (3 < 6 or 
         print("another letter")
     ```
 
-### While and For Loops
+
+### **While and For Loops**
 A loop takes a few lines of code and runs them over and over again.
-- **While Loops**: A while-loop uses a boolean test expression to control the run of a body of lines of code. We use a while-loop when we don't know the number of times to loop over a code, but we know the condition under which the code must be run(executed).
+
+**While Loops**: A while-loop uses a boolean test expression to control the run of a body of lines of code. We use a while-loop when we don't know the number of times to loop over a code, but we know the condition under which the code must be run(executed).
 The while-loop syntax has four parts: `while`, boolean test, colon, indented body line.
 ```py
 while test:
