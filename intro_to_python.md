@@ -70,13 +70,27 @@ Try these in your terminal: `9 < 6 and  3 < 6 or 2 < 6`,  `9 < 6 and  (3 < 6 or 
 
 - There's an optional `else:` part of an if statement that enables you to add code to run if the boolean test is `False`.
 
-![](assets/images/if2.png)
+    ```py
+    score = 97
+    high_score = 91
+    if score > high_score:
+        message = "New High Score !"
+    else:
+        message = "Oh well!"
+    ```
 
 - We also use `elif` (else if) blocks in if statements when we need to evaluate more than two conditions and take various actions based on the boolean tests for each of those conditions. Think of them like nested if statements in excel.
 
 ![](assets/images/elif.png)
 
 ### While and For Loops
+A loop takes a few lines of code and runs them over and over again.
+- **While Loops**: A while-loop uses a boolean test expression to control the run of a body of lines of code. We use a while-loop when we don't know the number of times to loop over a code, but we know the condition under which the code must be run(executed).
+The while-loop syntax has four parts: `while`, boolean test, colon, indented body line.
+```py
+while test:
+    indented body lines
+```
 
 ### Functions
 ### Data Structures
