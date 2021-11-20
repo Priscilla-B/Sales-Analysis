@@ -104,18 +104,74 @@ Try these in your terminal: `9 < 6 and  3 < 6 or 2 < 6`,  `9 < 6 and  (3 < 6 or 
 ### **While and For Loops**
 A loop takes a few lines of code and runs them over and over again.
 
-**While Loops**: A while-loop uses a boolean test expression to control the run of a body of lines of code. We use a while-loop when we don't know the number of times to loop over a code, but we know the condition under which the code must be run(executed).
+**While Loops**: A while-loop uses a boolean test expression to control the run of a body of lines of code. We use a while-loop when we want to run(execute) some lines of code as long as a certain condition is met, without explicitly stating the number of times we want to run those codes.
 The while-loop syntax has four parts: `while`, boolean test, colon, indented body line.
 ```py
 while test:
     indented body lines
 ```
 
+The while operation checks the boolean test expression. If it evaluates to `True`, it runs all the indented body of lines from top to bottom. It then goes back to the boolean test, check it's value again, and so on. If the test is `False`, the loop stops, and the lines of code after the loops are run.
+
+```py
+i = 0
+while i < 10:
+    print(i)
+    i = i + 1
+print("All done")
+```
+Considerations:
+- very often the last line of the while body act as an increment factor. It increases the variable used for the boolean test in order to advance it to the ultimate end of the loop.
+- while loops can have zero iterations, and that's okay
+- It's possible to write a loop that never exits. This happens when the boolean test is always true. It can also happen if the last increment line is eliminated.
+
+**For Loops**: The for loop is the most commonly used of all loops. The for-loop, also known as the "for each" loop look at each element in a collection(for example, a list) once.
+```py
+for num in [2, 4, 6, 8]:
+    print(num)
+```
+The loop begins with the keyword `for` followed by a variable(in this example `num`) to use in the loop. This is followed by the keyword `in` and a collection of elements for the loop(in this example `[2, 4, 6, 8]`). After this, there is a colon(`:`) followed by the indented body lines.
+The loop runs the body of lines again and again for each member of the collection.
+
+The python `range()` function can be used to create a collection of numbers on the fly. For example `range(10)` gives a collection of numbers starting from 0 ending at 9. `range(3, 8)` gives a collection of numbers starting from 3 ending at 7. 
+```py
+for i in range(6):
+    print(6)
+```
+
 ### Functions
+Functions help us divide lines of codes into sensible sub-parts. Functions are written to carry out a specific task and can be used repeatedly when needed.
+There are three main types of functions:
+- Built-in functions such as `print()`, `range()`, `min()`, `max()`, etc.
+- User-defined functions, which are functions users create to help them perform specific tasks
+- Anonymous or lambda functions, which are functions which are declared without the standard `def` keyword.
+
+Parts of a function definition:
+- **def**: a function begins with the word `def`
+- **name**: the function's name, chosen by the programmer
+- **parenthesis**: a pair of parenthesis `()` follows the function name
+- **body lines**: lines of code which makes up the function
+
+Functions can take in optional arguments and return values. Function arguments helps us pass information into the functions, and can be any data type or structure. The return statement enables the function to send some information whenever the function is *called*.
+
+To "call" a function is to invoke and run its lines of code. You call a function by typing the function's name followed by `()`. You supply the function with the needed parameters if the function has one.
+ ```py
+ def my_function(args):
+     # body of lines
+     return # some value
+
+```
 ### Data Structures
-- Lists
-- Dictionaries
-- Strings
+**Lists**
+A list contains series of any data type: strings, ints, other lists. Items inside a list are generally called elements.
+Items in a list can be assessed by using identifiers known as "indexes".
+- Indexing
+- Operations: len, min, max
+- Methods: append, pop, del, extend
+
+**Dictionaries**
+Dictionaries are used to store date in key:value pairs. Dictionaries are written in curly brackets. Dictionary items are ordered, changeables and does not allow duplicates.
+Strings
 
 ## What is Pandas
 ### DataFrame Operations
