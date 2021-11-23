@@ -139,7 +139,7 @@ for i in range(6):
     print(6)
 ```
 
-### Functions
+### **Functions**
 Functions help us divide lines of codes into sensible sub-parts. Functions are written to carry out a specific task and can be used repeatedly when needed.
 There are three main types of functions:
 - Built-in functions such as `print()`, `range()`, `min()`, `max()`, etc.
@@ -167,12 +167,12 @@ To "call" a function is to invoke and run its lines of code. You call a function
 - Returning a value through a function and printing are not the same. A function's return value can be printed or stored as a variable or used directly in other lines of code. When we print a value from a function, that value only shows up on the console and cannot be used in other line of code.
 A function's return value cannot be automatically seen on the console and must be printed before it can be seen on the console.
 
-### Data Structures
+### **Data Structures**
 Data structures are a fundamental aspect of any programming work flow. Data structures enables us to store data in a more organized and managed format which allows us to easily access stored data, relate them and perform operations on them efficiently.
 
 Python has various built-in data structures which includes Lists, Dictionaries, Sets and Tuples. For our purpose, we will be focusing on Lists and Dictionaries, which are more commonly used.
 
-**Lists**
+#### **Lists**
 Lists help us to store data in a sequential manner. A list contains series of any data type: strings, ints, other lists. Items inside a list are generally called elements.
 Items in a list can be assessed by using identifiers known as "indexes". These can be thought of as addresses assigned to every element in the list based on their position in the list.
 
@@ -268,7 +268,7 @@ filled_list = [1, 3, 'a', '❤️', 9,'!'] # creating a list with different kind
         >>> even_list = [elem for elem in lst if elem % 2 == 0 and elem != 0] # you can add conditionals to comprehenions
 
 
-**Dictionaries**
+#### **Dictionaries**
 Dictionaries are used to store date in key:value pairs. Dictionaries are written in curly brackets. Dictionary items are ordered, changeables and does not allow duplicates. An analogy that can help understand how dictionaries work is like a phone book that has various telephone numbers and the names of the owners. Each name and telephone number can be thought of as a key/value pair, where the name is the key and the number is as the value.
 
 - Dictionary Operations
@@ -312,7 +312,7 @@ Dictionaries are used to store date in key:value pairs. Dictionaries are written
     Bernard
     ```
 
-**Strings**
+#### **Strings**
 A python string stores text as a sequence of individual characters in quotation marks.
 
 - String operations
