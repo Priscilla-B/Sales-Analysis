@@ -55,24 +55,24 @@
 
 ### **Creating and setting up virtual environment**
 - what is a virtual environment? [virtual environments for absolute beginners](https://towardsdatascience.com/virtual-environments-for-absolute-beginners-what-is-it-and-how-to-create-one-examples-a48da8982d4b?gi=cf29cc3b5855)
-- navigate to your bash terminal in vscode and follow the instructions in the link above to create a new virtual environment(follow only part 2.2). Type the codes shown in bash
-- in your bash terminal, type *python -m venv sales-env* to create a new virtual environment called sales-env
-- in bash, type *echo "sales-env" > .gitignore*. This will create a gitignore([huh???](https://www.pluralsight.com/guides/how-to-use-gitignore-file)) file and add sales-env to the contents of the gitignore file. This will tell git not to include sales-env in the files/folders it's tracking. 
-- in the right navigation of your terminal in vscode, select powershell from the list of options
-- activate your virtual environment by typing *sales-env/Scripts/activate* in your powershell terminal
-- when you execute this command on your windows computer, you are likely to receive this error ".../activate cannot be loaded because the execution of scripts is disabled on this system". This error appears because windows has blocked unsual scripts from running on your computer to protect your computer from malware and other attacks.
-- to resolve this and enable the venv activation script to run, type *Set-ExecutionPolicy RemoteSigned -Scope CurrentUser* in your powershell terminal. ([source](https://stackoverflow.com/questions/4647429/powershell-on-windows-7-set-executionpolicy-for-regular-users))
-- now try activating the venv again by typing *sales-env/Scripts/activate* in your powershell terminal 
+- navigate to your terminal in vscode
+- type `pip install virtualenv` to install the virtual environment package
+- in your terminal, type `python -m venv sales-env` to create a new virtual environment called sales-env
+- in bash, type `echo "sales-env" > .gitignore`. This will create a gitignore([huh???](https://www.pluralsight.com/guides/how-to-use-gitignore-file)) file and add sales-env to the contents of the gitignore file. This will tell git not to include sales-env in the files/folders it's tracking. 
+- activate your virtual environment by typing `sales-env/Scripts/activate` in your terminal
+- when you execute this command on your windows computer, you are likely to receive this error *".../activate cannot be loaded because the execution of scripts is disabled on this system"*. This error appears because windows has blocked unsual scripts from running on your computer to protect your computer from malware and other attacks.
+- to resolve this and enable the venv activation script to run, type `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` in your powershell terminal. ([source](https://stackoverflow.com/questions/4647429/powershell-on-windows-7-set-executionpolicy-for-regular-users))
+- now try activating the venv again by typing `sales-env/Scripts/activate` in your powershell terminal 
 
 
 ### **Setting up folder structure and project files**
-- in your bash terminal, type *mkdir data-exploration* to create a new folder called data exploration. This is the folder that will keep our data and all the files we will create to view, clean and analyze the data. You can alternatively create this folder directly on your local machine
-- type *touch data-exploration/exploration.ipynb*. This will create a new jupyter notebook in the data-exploration folder where we will write codes to view, clean and analyze the data
+- in your bash terminal, type `mkdir data-exploration` to create a new folder called data exploration. This is the folder that will keep our data and all the files we will create to view, clean and analyze the data. You can alternatively create this folder directly on your local machine
+- type `touch data-exploration/exploration.ipynb`. This will create a new jupyter notebook in the data-exploration folder where we will write codes to view, clean and analyze the data
 - open the folder on your local machine and add the excel file that contains our raw data to this folder
-- navigate back to bash in vscode and type *touch sales-dash-app.py*. This will create a new file named sales-dash-app.py which will contain the codes for creating the online analytics dashboard.
-- in bash type *mkdir assets*. This will create a folder called assets which will contain files such as images, css styles([what???](https://blog.devmountain.com/what-is-css-and-why-use-it/)), etc., we will be using for our project
-- create a separate folder for your images in the assets folder by typing *mkdir assets/images* in your bash terminal
-- create the file which will contain your css codes in the assets folder by typing "touch assets/styles.css" in bash 
+- navigate back to bash in vscode and type `touch sales-dash-app.py`. This will create a new file named sales-dash-app.py which will contain the codes for creating the online analytics dashboard.
+- in bash type `mkdir assets`. This will create a folder called assets which will contain files such as images, css styles([what???](https://blog.devmountain.com/what-is-css-and-why-use-it/)), etc., we will be using for our project
+- create a separate folder for your images in the assets folder by typing `mkdir assets/images` in your bash terminal
+- create the file which will contain your css codes in the assets folder by typing `touch assets/styles.css` in bash 
 - under the explorer section in the left navigation in vscode, you should see your sales analysis folder. Under it, you should see these:
     - your assets folder, which also contains your images folder and your css file
     - your data-exploration folder which contains your excel data and jupyter notebook
@@ -83,21 +83,21 @@
 
 
 ## Updating your github repository with all these changes you have made
-- in bash, type *git status*
+- in bash, type `git status`
 - git will tell you all the untracked files which need to be added and committed
 - to commit all these changes and push them to github follow these instructions:
-    - use *git add file-name* to add a file to the staging area
-    - use *git commit -m "commit message"* to commit a staged file
-    - use *git push* to push commited files from local repository to remote repository
+    - use `git add file-name` to add a file to the staging area
+    - use `git commit -m "commit message"` to commit a staged file
+    - use `git push` to push commited files from local repository to remote repository
     - detailed explanation [here](https://www.earthdatascience.org/workshops/intro-version-control-git/basic-git-commands/)
-- type *git status* again to see if all changes have been commited and pushed
+- type `git status` again to see if all changes have been commited and pushed
 
 
 
 ***** If you have been able to follow up to this stage, you should now be fully set up to start coding !!! *****
 
 ## Before you Code - Installing packages
-- make sure your venv has been activated by typing *sales-env/Scripts/activate* in your powershell terminal
-- in your terminal type *pip install pandas*. This will install both numpy and pandas which we will use for data munging and mathematical and statistical operations on data.
-- *pip install ipykernel*, which is an engine for running jupyter notebooks
-- *pip install openpyxl* to read excel files
+- make sure your venv has been activated by typing `sales-env/Scripts/activate` in your powershell terminal
+- in your terminal type `pip install pandas`. This will install both numpy and pandas which we will use for data munging and mathematical and statistical operations on data.
+- `pip install ipykernel`, which is an engine for running jupyter notebooks
+- `pip install openpyxl` to read excel files
