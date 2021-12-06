@@ -2,7 +2,6 @@ from calendar import month_name
 from dash.dcc import ConfirmDialogProvider
 from dash.html.Legend import Legend
 from dash import Dash, html, dcc, Input, Output
-import dash_bootstrap_components as dbc
 from dash import dash_table as dt
 
 import numpy as np
@@ -10,7 +9,12 @@ from pandas.io.formats import style
 from pivot_tables import *
 from plots import *
 
-app = Dash(__name__)
+app = Dash(
+    __name__, 
+    meta_tags=[
+        {"name": "viewport", "content": "width=device-width, initial-scale=1"}
+    ]
+)
 #themes: CYBORG, SLATE, SOLAR, SUPERHERO, FLATLY
 #
 server = app.server
