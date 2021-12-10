@@ -41,7 +41,7 @@ def trend(df):
         autosize=True,
         margin=dict(
             l=10,
-            r=50,
+            r=10,
             b=10,
             t=10,
             pad=4
@@ -50,8 +50,8 @@ def trend(df):
             yanchor="bottom",
             xanchor="left",
             orientation='h',
-            y=1.02,
-            x=0.1,
+            y=1,
+            x=0.01,
             font= dict(size = 9)
         ),
         paper_bgcolor="rgba(0,0,0,0)",
@@ -60,35 +60,35 @@ def trend(df):
     )
     return trend_fig
 
-# def matrix(df):
+def matrix(df):
 
-    # matrix_fig = go.Figure(data = [go.Table(
-    #     columnwidth=[120, 60, 60, 80],
-    #     header = dict(values=list(df.columns),
-    #                 fill_color="gray",
-    #                 line_color="gray",
-    #                 font = dict(color="white", size=10),
-    #                 height=22,
-    #                 align="left"),
-    #     cells =  dict(values=df.T, 
-    #                 fill_color="white",
-    #                 line = dict(color="gray", width=None),
-    #                 font = dict(color="black", size=8),
-    #                 height = 16,
-    #                 align="left")
-    # )])
+    matrix_fig = go.Figure(data = [go.Table(
+        columnwidth=[140, 60, 60, 80],
+        header = dict(values=list(df.columns),
+                    fill_color="gray",
+                    line_color="gray",
+                    font = dict(color="white", size=10),
+                    height=22,
+                    align="left"),
+        cells =  dict(values=df.T, 
+                    fill_color="white",
+                    line = dict(color="#d3d3d3", width=None),
+                    font = dict(color="black", size=8),
+                    height = 15,
+                    align="left")
+    )])
 
-    # matrix_fig.update_layout(
-    #     autosize=True,
-    #     margin=dict(
-    #         l=10,
-    #         r=50,
-    #         b=10,
-    #         t=10,
-    #         pad=4
-    #     )
-    # )
-    # return matrix_fig
+    matrix_fig.update_layout(
+        autosize=True,
+        margin=dict(
+            l=20,
+            r=20,
+            b=5,
+            t=5,
+            pad=4
+        )
+    )
+    return matrix_fig
 
 def create_map(df):
     ghana_geo = json.load(open("ghana_regions.json","r"))
