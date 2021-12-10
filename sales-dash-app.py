@@ -22,6 +22,7 @@ server = app.server
 date_df = date_table()
 df = create_data("denormalized-data.xlsx")
 
+
 cards = html.Div(
     className="cards",
     children=[
@@ -83,15 +84,11 @@ trend_matrix = html.Div(
                     children=["PRODUCT SUB-CATEGORY"]
                 ),
                 html.Hr(),
-                dt.DataTable(id="matrix-chart",
-                style_table={'height': '250px', 'overflowY': 'auto'},
-                style_cell = {
-                    'fontsize':4})
-                # dash_table.DataTable(
-                #     id="matrix-chart",
-                #     columns = [{"name":i, "id":i} for i in sub_category_df.columns],
-                #     data = sub_category_df.to_dict("records")
-                # )
+                # dt.DataTable(id="matrix-chart",
+                # style_table={'height': '250px', 'overflowY': 'auto'},
+                # style_cell = {
+                #     'fontsize':4})
+                dcc.Graph(id="matrix-chart")
             ]
         )
     ]
@@ -315,7 +312,7 @@ def create_filtered_data(year, period, time, delivery, segment, region, category
     Output(component_id="profit", component_property="children"),
     Output(component_id="p-margin", component_property="children"),
     Output(component_id="trend-line", component_property="figure"),
-    #Output(component_id="matrix-chart", component_property="figure"),
+    Output(component_id="matrix-chart", component_property="figure"),
     Output(component_id="map", component_property="figure")],
     Input(component_id="data-store", component_property="data")
     
@@ -337,71 +334,14 @@ def create_charts(data):
     trends_df = trend_pivot(df)
     trend_fig = trend(trends_df)
 
-    # sub_category_df = sub_category_pivot(df)
-    # matrix_chart = matrix(sub_category_df)
+    sub_category_df = sub_category_pivot(df)
+    matrix_chart = matrix(sub_category_df)
 
     regions_df = region_pivot(df)
     map_chart = create_map(regions_df)
 
     
-    return revenue, cost, profit, p_margin, trend_fig, map_chart
-
-@app.callback(
-    [Output(component_id="matrix-chart", component_property="data"),
-    Output(component_id="matrix-chart", component_property="columns"),
-    #Output(component_id="matrix-chart", component_property="style_data_conditional")
-    ],
-    Input(component_id="data-store", component_property="data")
-)
-
-def populate_data_table(filtered_data):
-    sub_category_df = sub_category_pivot(filtered_data)
-    columns = [{"name": i, "id": i} for i in sub_category_df.columns]
-    # bar_columns = ["Revenue", "Cost"]
-    # n_bins = len(sub_category_df["Sub-Category"])
-    # bounds = [i * (1.0 / n_bins) for i in range(n_bins + 1)]
-    # bars = []
-    # for col_name in bar_columns:
-    #     col = sub_category_df[col_name]
-    #     ranges = [
-    #         ((col.max() - col.min()) * i) + col.min()
-    #         for i in bounds
-    #     ] 
-    #     styles = []
-    #     for i in range(1, len(bounds)):
-    #             min_bound = ranges[i - 1]
-    #             max_bound = ranges[i]
-    #             max_bound_percentage = bounds[i] * 100
-    #             styles.append({
-    #                 'if': {
-    #                     'filter_query': (
-    #                         '{{{column}}} >= {min_bound}' +
-    #                         (' && {{{column}}} < {max_bound}' if (i < len(bounds) - 1) else '')
-    #                     ).format(column=col, min_bound=min_bound, max_bound=max_bound),
-    #                     'column_id': col
-    #                 },
-    #                 'background': (
-    #                     """
-    #                         linear-gradient(90deg,
-    #                         #0074D9 0%,
-    #                         #0074D9 {max_bound_percentage}%,
-    #                         black {max_bound_percentage}%,
-    #                         black 100%)
-    #                     """.format(max_bound_percentage=max_bound_percentage)
-    #                 ),
-    #                 'paddingBottom': 2,
-    #                 'paddingTop': 2        
-    #     })
-    #     bars.append(styles)  
-    
-    # style_data_conditional =bars[0]+bars[1]
-    sub_category_df["Revenue"] = sub_category_df["Revenue"].apply(lambda x: "{:,.1f}k".format((x/1000)))
-    sub_category_df["Cost"] = sub_category_df["Cost"].apply(lambda x: "{:,.1f}k".format((x/1000)))
-
-    data = sub_category_df.to_dict("records")
-
-
-    return data, columns
+    return revenue, cost, profit, p_margin, trend_fig, matrix_chart, map_chart
 
 
 if __name__ == '__main__':
